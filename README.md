@@ -46,6 +46,6 @@ You may open up issues here or search in the original [LLaMA Factory](https://gi
 
 We open source two of our trained TAMA models on huggingface:
 
-- [TAMA @ lr=5e-7](https://huggingface.co/dnaihao/tama-5e-7)
-- [TAMA @ lr=1e-6](https://huggingface.co/dnaihao/tama-1e-6)
+- [TAMA @ lr=5e-7](https://huggingface.co/MichiganNLP/tama-5e-7)
+- [TAMA @ lr=1e-6](https://huggingface.co/MichiganNLP/tama-1e-6)
 
