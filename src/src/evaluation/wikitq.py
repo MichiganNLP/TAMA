@@ -16,13 +16,15 @@ def eval() -> None:
     for folder_name, ele in files.items():
         file_path = ele["path"]
         steps = ele["steps"]
-        with open(file_path, 'r') as f:
+        with open(file_path, "r") as f:
             data = f.readlines()
         data = [json.loads(d) for d in data]
-        
+
         predictions = [line["predict"] for line in data]
-  
-        with open("/code/tablellm/datasets/tama_instruct/wikitq/raw/test.json", 'r') as f:
+
+        with open(
+            "/code/tablellm/datasets/tama_instruct/wikitq/raw/test.json", "r"
+        ) as f:
             gold_data = json.load(f)
         references = [line["answers"] for line in gold_data]
         num_correct = 0
@@ -43,7 +45,7 @@ def eval() -> None:
         logger.info(f"WikiTQ: {acc}")
 
         print(f"{extract_info(folder_name)}, {steps}, {acc}")
-        
+
+
 if __name__ == "__main__":
     eval()
-    

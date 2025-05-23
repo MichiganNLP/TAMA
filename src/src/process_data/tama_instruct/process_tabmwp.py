@@ -5,17 +5,18 @@ from loguru import logger
 
 random.seed(42)
 
+
 def process(split: str) -> None:
     logger.info("Processing TabMWP")
     root_dir = "../datasets/tama_instruct/tabmwp"
 
     if split == "test":
-        with open(f"{root_dir}/raw/PromptPG/data/tabmwp/problems_test.json", 'r') as f:
+        with open(f"{root_dir}/raw/PromptPG/data/tabmwp/problems_test.json", "r") as f:
             data = json.load(f)
     elif split == "train":
-        with open(f"{root_dir}/raw/PromptPG/data/tabmwp/problems_train.json", 'r') as f:
+        with open(f"{root_dir}/raw/PromptPG/data/tabmwp/problems_train.json", "r") as f:
             data = json.load(f)
-        
+
     processed = []
     for itm in list(data.values()):
         title = itm["table_title"]
@@ -26,9 +27,10 @@ def process(split: str) -> None:
         choice_str = ""
         if choices:
             choice_str = f"Please choose from the choices:\n{', '.join(choices)}"
-        processed.append({
-            "instruction": "Please answer the question given the table in the format of {'result': 'Your Answer'}.",
-            "input": f"""\
+        processed.append(
+            {
+                "instruction": "Please answer the question given the table in the format of {'result': 'Your Answer'}.",
+                "input": f"""\
 Table Title:
 {title}
 
@@ -43,13 +45,14 @@ Question:
 
 {choice_str}
 """,
-            "output": answer
-        })
-    
+                "output": answer,
+            }
+        )
+
     if split == "train":
         processed = random.sample(processed, k=200)
 
-    with open(f"{root_dir}/processed/{split}_json.json", 'w') as f:
+    with open(f"{root_dir}/processed/{split}_json.json", "w") as f:
         json.dump(processed, f, indent=4)
 
 

@@ -11,12 +11,12 @@ import functools
 # Compare and sort cells
 def find_column(coord):
     """ Parse column letter from 'E3'. """
-    return re.findall('[a-zA-Z]+', coord)
+    return re.findall("[a-zA-Z]+", coord)
 
 
 def find_row(coord):
     """ Parse row number from 'E3'. """
-    return re.findall('[0-9]+', coord)
+    return re.findall("[0-9]+", coord)
 
 
 def cell_compare(cell1, cell2):
@@ -74,11 +74,12 @@ def normalize(x):
     if x is None:
         return None
     # Remove diacritics
-    x = ''.join(c for c in unicodedata.normalize('NFKD', x)
-                if unicodedata.category(c) != 'Mn')
+    x = "".join(
+        c for c in unicodedata.normalize("NFKD", x) if unicodedata.category(c) != "Mn"
+    )
     # Normalize quotes and dashes
     x = re.sub("[‘’´`]", "'", x)
-    x = re.sub("[“”]", "\"", x)
+    x = re.sub("[“”]", '"', x)
     x = re.sub("[‐‑‒–—−]", "-", x)
     while True:
         old_x = x
@@ -87,14 +88,14 @@ def normalize(x):
         # Remove details in parenthesis
         x = re.sub("(?<!^)( \([^)]*\))*$", "", x.strip())
         # Remove outermost quotation mark
-        x = re.sub('^"([^"]*)"$', r'\1', x.strip())
+        x = re.sub('^"([^"]*)"$', r"\1", x.strip())
         if x == old_x:
             break
     # Remove final '.'
-    if x and x[-1] == '.':
+    if x and x[-1] == ".":
         x = x[:-1]
     # Collapse whitespaces and convert to lower case
-    x = re.sub('\s+', ' ', x, flags=re.U).lower().strip()
+    x = re.sub("\s+", " ", x, flags=re.U).lower().strip()
     return x
 
 
@@ -102,11 +103,11 @@ def naive_str_to_float(string):
     """ A naive way to convert str to float, if convertable."""
     sanitized = string
     try:
-        if sanitized[0] == '(':
+        if sanitized[0] == "(":
             sanitized = sanitized[1:]
-        if (sanitized[-1] == '%') or (sanitized[-1] == ')'):
-            sanitized = sanitized[: -1]
-        sanitized = sanitized.replace(',', '')
+        if (sanitized[-1] == "%") or (sanitized[-1] == ")"):
+            sanitized = sanitized[:-1]
+        sanitized = sanitized.replace(",", "")
         new = float(sanitized)
         return new
     except:

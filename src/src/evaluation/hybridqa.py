@@ -63,25 +63,37 @@ def get_raw_scores(examples, reference):
     f1_scores = {}
 
     for example in examples:
-        qas_id = example['question_id']
-        gold_answers = [reference['reference'][qas_id]]
+        qas_id = example["question_id"]
+        gold_answers = [reference["reference"][qas_id]]
 
-        prediction = example['pred']
+        prediction = example["pred"]
         exact_scores[qas_id] = max(compute_exact(a, prediction) for a in gold_answers)
         f1_scores[qas_id] = max(compute_f1(a, prediction) for a in gold_answers)
 
-    qid_list = reference['reference'].keys()
+    qid_list = reference["reference"].keys()
     total = len(qid_list)
 
-    table_list = reference['table']
-    passage_list = reference['passage']
+    table_list = reference["table"]
+    passage_list = reference["passage"]
 
     return collections.OrderedDict(
         [
-            ("table exact", 100.0 * sum(exact_scores[k] for k in table_list) / len(table_list)),
-            ("table f1", 100.0 * sum(f1_scores[k] for k in table_list) / len(table_list)),
-            ("passage exact", 100.0 * sum(exact_scores[k] for k in passage_list) / len(passage_list)),
-            ("passage f1", 100.0 * sum(f1_scores[k] for k in passage_list) / len(passage_list)),
+            (
+                "table exact",
+                100.0 * sum(exact_scores[k] for k in table_list) / len(table_list),
+            ),
+            (
+                "table f1",
+                100.0 * sum(f1_scores[k] for k in table_list) / len(table_list),
+            ),
+            (
+                "passage exact",
+                100.0 * sum(exact_scores[k] for k in passage_list) / len(passage_list),
+            ),
+            (
+                "passage f1",
+                100.0 * sum(f1_scores[k] for k in passage_list) / len(passage_list),
+            ),
             ("total exact", 100.0 * sum(exact_scores[k] for k in qid_list) / total),
             ("total f1", 100.0 * sum(f1_scores[k] for k in qid_list) / total),
             ("total", total),
@@ -90,7 +102,6 @@ def get_raw_scores(examples, reference):
 
 
 class EvaluateTool(object):
-
     def __init__(self, args):
         self.args = args
 
@@ -99,8 +110,8 @@ class EvaluateTool(object):
         exact_scores = {}
         f1_scores = {}
         for pred, gold in zip(preds, golds):
-            qas_id = gold['id']
-            gold_answers = [gold['answer_text']]
+            qas_id = gold["id"]
+            gold_answers = [gold["answer_text"]]
 
             exact_scores[qas_id] = max(compute_exact(a, pred) for a in gold_answers)
             f1_scores[qas_id] = max(compute_f1(a, pred) for a in gold_answers)
@@ -110,8 +121,6 @@ class EvaluateTool(object):
         summary["f1"] = sum(f1_scores[k] for k in qid_list) / total
 
         return summary
-    
-
 
 
 def eval() -> None:
@@ -119,12 +128,14 @@ def eval() -> None:
     for folder_name, ele in files.items():
         file_path = ele["path"]
         steps = ele["steps"]
-        with open(file_path, 'r') as f:
+        with open(file_path, "r") as f:
             data = f.readlines()
         data = [json.loads(d) for d in data]
-        
+
         predictions = [line["predict"] for line in data]
-        references = [{"answer_text": line["label"], "id": i} for i, line in enumerate(data)]
+        references = [
+            {"answer_text": line["label"], "id": i} for i, line in enumerate(data)
+        ]
 
         if "original" in folder_name:
             num_correct = 0
@@ -140,7 +151,7 @@ def eval() -> None:
         logger.info(f"HybridQA: {result}")
 
         print(f"{extract_info(folder_name)}, {steps}, {result}")
-        
+
+
 if __name__ == "__main__":
     eval()
-    

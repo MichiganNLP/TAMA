@@ -25,7 +25,9 @@ def hmt_process_answer(answer):
         return naive_str_to_float(answer.strip().lower())
     if isinstance(answer, list):
         if isinstance(answer[0], list):  # pred region
-            if len(answer) == 1 and len(answer[0]) == 1:  # pred region with one cell, flatten
+            if (
+                len(answer) == 1 and len(answer[0]) == 1
+            ):  # pred region with one cell, flatten
                 return hmt_process_answer(answer[0][0])
             elif len(answer) == 1:  # pred region with one line
                 return hmt_process_answer(answer[0])
@@ -44,7 +46,22 @@ def hmt_equal(prediction, answer):
     # import pdb
     # pdb.set_trace()
     try:
-        if prediction.split(",")[0] not in ['inf', 'infinity', 'INF', 'INFINITY', 'True', 'NAN', 'nan', 'False', '-inf', '-INF', '-INFINITY', '-infinity', 'NaN', 'Nan'] and float(prediction.split(",")[0]):
+        if prediction.split(",")[0] not in [
+            "inf",
+            "infinity",
+            "INF",
+            "INFINITY",
+            "True",
+            "NAN",
+            "nan",
+            "False",
+            "-inf",
+            "-INF",
+            "-INFINITY",
+            "-infinity",
+            "NaN",
+            "Nan",
+        ] and float(prediction.split(",")[0]):
             prediction = float(prediction.split(",")[0])
     except:
         prediction = prediction
@@ -61,7 +78,9 @@ def hmt_equal(prediction, answer):
     if isinstance(prediction, list):
         if len(prediction) != len(answer):
             return False
-        return all([hmt_equal(prediction[i], answer[i]) for i in range(len(prediction))])
+        return all(
+            [hmt_equal(prediction[i], answer[i]) for i in range(len(prediction))]
+        )
 
 
 def evaluate(golds, preds):
@@ -90,8 +109,8 @@ def evaluate(golds, preds):
             wrong_list.append(wrong_item)
 
         correct_num += hmt_score(pred, gold)
-        
-    correct_percent = 100.0 * correct_num/len(golds)
+
+    correct_percent = 100.0 * correct_num / len(golds)
 
     # import json
     # with open("/users/PAA0201/shubaobao/LongLoRA/tommy_server/ckp-15k-pred/correct_hitab.json", "w") as f:
@@ -101,11 +120,10 @@ def evaluate(golds, preds):
     # print("correct_percent:", correct_percent)
     # import pdb
     # pdb.set_trace()
-    return {'exact_match': correct_percent}
+    return {"exact_match": correct_percent}
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     # main()
     # test()
     pred = "-0.8"

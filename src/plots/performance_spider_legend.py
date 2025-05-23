@@ -7,16 +7,21 @@ from plots.utils.utils import set_parameters, NumberFontSize, plot_details, FigS
 set_parameters()
 
 # Step 1: Define the models and their performance on 5 benchmarks
-models = ['TableLlama', 'TableLLM', 'TableBenchLLM', 'TAMA (ours)']  # Names of the models
-benchmarks = ['Table-Syn', 'IFEval', 'MMLU', 'MMLU-Pro', 'AI2ARC', 'GPQA']  # Benchmarks
+models = [
+    "TableLlama",
+    "TableLLM",
+    "TableBenchLLM",
+    "TAMA (ours)",
+]  # Names of the models
+benchmarks = ["Table-Syn", "IFEval", "MMLU", "MMLU-Pro", "AI2ARC", "GPQA"]  # Benchmarks
 
 # Performance data for each model on the benchmarks (example data)
 performance = {
-    'TableLlama': [10,25.78,30.27,12.33,30.89,23.44],
-    'TableLLM': [10,30.46,35.9,15.36,34.81,24.11],
-    'TableBenchLLM': [10,32.85,52.67,17.84,53.5,27.01],
+    "TableLlama": [10, 25.78, 30.27, 12.33, 30.89, 23.44],
+    "TableLLM": [10, 30.46, 35.9, 15.36, 34.81, 24.11],
+    "TableBenchLLM": [10, 32.85, 52.67, 17.84, 53.5, 27.01],
     # "L-Instruct": [53.6,79.62,66.04,22.1,80.89,32.14],
-    "TAMA (ours)": [64.93,74.7,66.99,31.84,81.23,31.92]
+    "TAMA (ours)": [64.93, 74.7, 66.99, 31.84, 81.23, 31.92],
 }
 
 # Number of variables (benchmarks)
@@ -31,7 +36,7 @@ fig, ax = plt.subplots(figsize=(15, 8), subplot_kw=dict(polar=True))
 # Step 3: Plot each model's performance
 for model, perf in performance.items():
     perf += perf[:1]  # Repeat the first value to close the radar chart
-    ax.plot([], [], linewidth=2, linestyle='solid', label=model)  # Draw the radar chart
+    ax.plot([], [], linewidth=2, linestyle="solid", label=model)  # Draw the radar chart
     ax.fill([], [], alpha=0.25)  # Fill the area under the plot
 
 plt.gca().set_axis_off()
@@ -39,7 +44,7 @@ plt.gca().set_axis_off()
 ax.set_xticks(angles[:-1])
 
 ax.set_xticklabels(benchmarks, size=20)
-ax.tick_params(axis='x', pad=20)
+ax.tick_params(axis="x", pad=20)
 
 # # Step 1: Adjust the padding for specific tick labels (e.g., Benchmark 1 and Benchmark 3)
 # tick_labels = ax.get_xticklabels()

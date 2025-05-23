@@ -161,7 +161,6 @@ def _strip_string(string):
     return string
 
 
-
 """
 Answer checker API that uses sympy to simplify expressions and check for equality.
 
@@ -409,7 +408,7 @@ def grade_answer(given_answer: str, ground_truth: str) -> bool:
     """
     if given_answer is None:
         return False
-    
+
     if "%" in ground_truth:
         try:
             ground_truth = str(eval(ground_truth.strip().replace("\\%", "")) / 100)
@@ -437,7 +436,7 @@ def grade_answer(given_answer: str, ground_truth: str) -> bool:
 
     ground_truth_elems = split_tuple(ground_truth_normalized)
     given_elems = split_tuple(given_normalized)
-    
+
     if len(ground_truth_elems) > 1 and (
         ground_truth_normalized[0] != given_normalized[0]
         or ground_truth_normalized[-1] != given_normalized[-1]
@@ -452,5 +451,6 @@ def grade_answer(given_answer: str, ground_truth: str) -> bool:
                 break
 
     return is_correct
+
 
 # print(grade_answer("(-sqrt(13)/2 + 3/2 - 1/(3/2 - sqrt(13)/2))**4", "81"))

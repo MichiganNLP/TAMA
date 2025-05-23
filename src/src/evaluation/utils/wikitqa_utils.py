@@ -44,7 +44,7 @@ A target item T matches a predicted item P if one of the following is true:
 3. T can be interpreted as a date T_D, P is a date, and P = T_D
    (exact match on all fields; e.g., xx-01-12 and 1990-01-12 do not match)
 """
-__version__ = '1.0.2'
+__version__ = "1.0.2"
 
 import sys, os, re, argparse
 import unicodedata
@@ -54,15 +54,17 @@ from abc import ABCMeta, abstractmethod
 
 ################ String Normalization ################
 
+
 def normalize(x):
     if not isinstance(x, str):
-        x = x.decode('utf8', errors='ignore')
+        x = x.decode("utf8", errors="ignore")
     # Remove diacritics
-    x = ''.join(c for c in unicodedata.normalize('NFKD', x)
-                if unicodedata.category(c) != 'Mn')
+    x = "".join(
+        c for c in unicodedata.normalize("NFKD", x) if unicodedata.category(c) != "Mn"
+    )
     # Normalize quotes and dashes
     x = re.sub(r"[‘’´`]", "'", x)
-    x = re.sub(r"[“”]", "\"", x)
+    x = re.sub(r"[“”]", '"', x)
     x = re.sub(r"[‐‑‒–—−]", "-", x)
     while True:
         old_x = x
@@ -71,18 +73,19 @@ def normalize(x):
         # Remove details in parenthesis
         x = re.sub(r"(?<!^)( \([^)]*\))*$", "", x.strip())
         # Remove outermost quotation mark
-        x = re.sub(r'^"([^"]*)"$', r'\1', x.strip())
+        x = re.sub(r'^"([^"]*)"$', r"\1", x.strip())
         if x == old_x:
             break
     # Remove final '.'
-    if x and x[-1] == '.':
+    if x and x[-1] == ".":
         x = x[:-1]
     # Collapse whitespaces and convert to lower case
-    x = re.sub(r'\s+', ' ', x, flags=re.U).lower().strip()
+    x = re.sub(r"\s+", " ", x, flags=re.U).lower().strip()
     return x
 
 
 ################ Value Types ################
+
 
 class Value(object):
     __metaclass__ = ABCMeta
@@ -107,7 +110,6 @@ class Value(object):
 
 
 class StringValue(Value):
-
     def __init__(self, content):
         assert isinstance(content, str)
         self._normalized = normalize(content)
@@ -120,7 +122,8 @@ class StringValue(Value):
         return self._hash
 
     def __str__(self):
-        return 'S' +  str([self.normalized])
+        return "S" + str([self.normalized])
+
     __repr__ = __str__
 
     def match(self, other):
@@ -129,7 +132,6 @@ class StringValue(Value):
 
 
 class NumberValue(Value):
-
     def __init__(self, amount, original_string=None):
         assert isinstance(amount, (int, float))
         if abs(amount - round(amount)) < 1e-6:
@@ -153,7 +155,8 @@ class NumberValue(Value):
         return self._hash
 
     def __str__(self):
-        return ('N(%f)' % self.amount) + str([self.normalized])
+        return ("N(%f)" % self.amount) + str([self.normalized])
+
     __repr__ = __str__
 
     def match(self, other):
@@ -183,7 +186,6 @@ class NumberValue(Value):
 
 
 class DateValue(Value):
-
     def __init__(self, year, month, day, original_string=None):
         """Create a new DateValue. Placeholders are marked as -1."""
         assert isinstance(year, int)
@@ -194,10 +196,11 @@ class DateValue(Value):
         self._month = month
         self._day = day
         if not original_string:
-            self._normalized = '{}-{}-{}'.format(
-                year if year != -1 else 'xx',
-                month if month != -1 else 'xx',
-                day if day != '-1' else 'xx')
+            self._normalized = "{}-{}-{}".format(
+                year if year != -1 else "xx",
+                month if month != -1 else "xx",
+                day if day != "-1" else "xx",
+            )
         else:
             self._normalized = normalize(original_string)
         self._hash = hash((self._year, self._month, self._day))
@@ -213,8 +216,10 @@ class DateValue(Value):
         return self._hash
 
     def __str__(self):
-        return (('D(%d,%d,%d)' % (self._year, self._month, self._day))
-                + str([self._normalized]))
+        return ("D(%d,%d,%d)" % (self._year, self._month, self._day)) + str(
+            [self._normalized]
+        )
+
     __repr__ = __str__
 
     def match(self, other):
@@ -233,11 +238,11 @@ class DateValue(Value):
             tuple (year, month, date) if successful; otherwise None.
         """
         try:
-            ymd = text.lower().split('-')
+            ymd = text.lower().split("-")
             assert len(ymd) == 3
-            year = -1 if ymd[0] in ('xx', 'xxxx') else int(ymd[0])
-            month = -1 if ymd[1] == 'xx' else int(ymd[1])
-            day = -1 if ymd[2] == 'xx' else int(ymd[2])
+            year = -1 if ymd[0] in ("xx", "xxxx") else int(ymd[0])
+            month = -1 if ymd[1] == "xx" else int(ymd[1])
+            day = -1 if ymd[2] == "xx" else int(ymd[2])
             assert not (year == month == day == -1)
             assert month == -1 or 1 <= month <= 12
             assert day == -1 or 1 <= day <= 31
@@ -247,6 +252,7 @@ class DateValue(Value):
 
 
 ################ Value Instantiation ################
+
 
 def to_value(original_string, corenlp_value=None):
     """Convert the string to Value object.
@@ -276,6 +282,7 @@ def to_value(original_string, corenlp_value=None):
     # String.
     return StringValue(original_string)
 
+
 def to_value_list(original_strings, corenlp_values=None):
     """Convert a list of strings to a list of Values
 
@@ -289,13 +296,15 @@ def to_value_list(original_strings, corenlp_values=None):
     if corenlp_values is not None:
         assert isinstance(corenlp_values, (list, tuple, set))
         assert len(original_strings) == len(corenlp_values)
-        return list(set(to_value(x, y) for (x, y)
-                in zip(original_strings, corenlp_values)))
+        return list(
+            set(to_value(x, y) for (x, y) in zip(original_strings, corenlp_values))
+        )
     else:
         return list(set(to_value(x) for x in original_strings))
 
 
 ################ Check the Predicted Denotations ################
+
 
 def check_denotation(target_values, predicted_values):
     """Return True if the predicted denotation is correct.
@@ -318,6 +327,7 @@ def check_denotation(target_values, predicted_values):
 
 ################ Batch Mode ################
 
+
 def tsv_unescape(x):
     """Unescape strings in the TSV file.
     Escaped characters include:
@@ -330,7 +340,8 @@ def tsv_unescape(x):
     Returns:
         a unicode
     """
-    return x.replace(r'\n', '\n').replace(r'\p', '|').replace('\\\\', '\\')
+    return x.replace(r"\n", "\n").replace(r"\p", "|").replace("\\\\", "\\")
+
 
 def tsv_unescape_list(x):
     """Unescape a list in the TSV file.
@@ -341,4 +352,4 @@ def tsv_unescape_list(x):
     Returns:
         a list of unicodes
     """
-    return [tsv_unescape(y) for y in x.split('|')]
+    return [tsv_unescape(y) for y in x.split("|")]

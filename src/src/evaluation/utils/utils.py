@@ -37,6 +37,7 @@ root_dir = "/code/table-sft/saves/phi-mini-finetune"
 temperature = 0.01
 top_p = 0.95
 
+
 def find_files(root_dir: str, name: str) -> Dict:
     """ 
     Given the root dir, search for all the predictions correponding to the dataset name
@@ -45,14 +46,19 @@ def find_files(root_dir: str, name: str) -> Dict:
     folders = os.listdir(root_dir)
     pred_files = dict()
 
-    if "gpt-3.5" in root_dir or "gpt-4" in root_dir or root_dir.endswith("tablellm") or root_dir.endswith("tablellama") \
-        or "none-0.0e-0" in root_dir:
+    if (
+        "gpt-3.5" in root_dir
+        or "gpt-4" in root_dir
+        or root_dir.endswith("tablellm")
+        or root_dir.endswith("tablellama")
+        or "none-0.0e-0" in root_dir
+    ):
         folders = os.listdir(f"{root_dir}/evaluations/")
         for folder in folders:
             if name == folder:
                 pred_files[f"original_{folder}_0"] = {
                     "path": f"{root_dir}/evaluations/{folder}/generated_predictions.jsonl",
-                    "steps": 0
+                    "steps": 0,
                 }
         return pred_files
 
@@ -75,24 +81,26 @@ def find_files(root_dir: str, name: str) -> Dict:
         # data_folder_name = f"{name}-{temperature}-{top_p}"
         data_folder_name = name
         step = max([int(x.split("-")[-1]) for x in dirs if "checkpoint" in x])
-        if os.path.exists(f"{root_dir}/{folder}/checkpoint-{step}/evaluations/{data_folder_name}/generated_predictions.jsonl"):
-        # if os.path.exists(f"{root_dir}/{folder}/evaluations/{data_folder_name}/generated_predictions.jsonl"):
+        if os.path.exists(
+            f"{root_dir}/{folder}/checkpoint-{step}/evaluations/{data_folder_name}/generated_predictions.jsonl"
+        ):
+            # if os.path.exists(f"{root_dir}/{folder}/evaluations/{data_folder_name}/generated_predictions.jsonl"):
             # also read in the number of steps
             if os.path.exists(f"{root_dir}/{folder}/trainer_log.jsonl"):
-                with open(f"{root_dir}/{folder}/trainer_log.jsonl", 'r') as f:
+                with open(f"{root_dir}/{folder}/trainer_log.jsonl", "r") as f:
                     trainer_log = f.readlines()
                 trainer_log = [json.loads(line) for line in trainer_log]
                 steps = trainer_log[0]["total_steps"]
             else:
                 steps = 0
             steps = step
-            
+
             pred_files[f"{folder}_{step}"] = {
                 # "path": f"{root_dir}/{folder}/evaluations/{data_folder_name}/generated_predictions.jsonl",
                 "path": f"{root_dir}/{folder}/checkpoint-{step}/evaluations/{data_folder_name}/generated_predictions.jsonl",
-                "steps": steps
+                "steps": steps,
             }
-            
+
     return pred_files
 
 
@@ -111,18 +119,19 @@ def find_eval_files(root_dir: str, name: str) -> Dict:
         if os.path.exists(f"{root_dir}/{folder}/evaluations/{name}/results.log"):
 
             # also read in the number of steps
-            with open(f"{root_dir}/{folder}/trainer_log.jsonl", 'r') as f:
+            with open(f"{root_dir}/{folder}/trainer_log.jsonl", "r") as f:
                 trainer_log = f.readlines()
             trainer_log = [json.loads(line) for line in trainer_log]
             steps = trainer_log[0]["total_steps"]
-            
+
             steps = step
             pred_files[f"{folder}_{step}"] = {
                 "path": f"{root_dir}/{folder}/evaluations/{name}/results.log",
-                "steps": steps
+                "steps": steps,
             }
-            
+
     return pred_files
+
 
 def extract_info(name: str) -> str:
     """ 
@@ -164,9 +173,8 @@ def extract_info(name: str) -> str:
         model_name = "phi-3"
     if "original" in name:
         return ", ".join(["0", "original-model", "NA", "NA"])
-    
+
     assert model_name
     train_data_name = spans[-3]
     lr = "-".join(spans[-2:]).split("_")[0]
     return ", ".join([experiment_id, model_name, train_data_name, lr])
-    

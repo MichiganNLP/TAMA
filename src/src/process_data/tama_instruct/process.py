@@ -13,17 +13,18 @@ random.seed(42)
 
 root_dir = "../datasets/tama_instruct/seq2seq_unifiedskg/"
 
+
 def replace_row_patterns(text):
     # Regular expression to match "row X :" where X is any number
-    result = re.sub(r'row \d+ :', r' | [SEP] | ', text)
+    result = re.sub(r"row \d+ :", r" | [SEP] | ", text)
     return result
 
 
 def process(name: str) -> None:
 
-    with open(f"{root_dir}/end2end_data/{name}", 'r') as f:
+    with open(f"{root_dir}/end2end_data/{name}", "r") as f:
         data = json.load(f)
-    
+
     if "train" in name:
         data = random.sample(data, k=200)
 
@@ -62,15 +63,16 @@ def process(name: str) -> None:
             raise NotImplementedError
         output = itm["seq_out"]
         table_content = replace_row_patterns(table_content)
-        processed.append({
-            "input": f"{table_content}\n\n{text}",
-            "instruction": instruction,
-            "output": output
-        })
-    
-    with open(f"{root_dir}/processed/{name}", 'w') as f:
-        json.dump(processed, f, indent=4) 
+        processed.append(
+            {
+                "input": f"{table_content}\n\n{text}",
+                "instruction": instruction,
+                "output": output,
+            }
+        )
 
+    with open(f"{root_dir}/processed/{name}", "w") as f:
+        json.dump(processed, f, indent=4)
 
 
 if __name__ == "__main__":
@@ -88,7 +90,7 @@ if __name__ == "__main__":
         # "sqa_test.json",
         "totto_train.json",
         "wikisql_train.json",
-        "wikitq_train.json"
+        "wikitq_train.json",
     ]:
         logger.info(f"Processing {name} file.")
         process(name)
