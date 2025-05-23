@@ -1,0 +1,119 @@
+{
+    "combined_3_10": {
+        "file_name": "../datasets/combined_3/10_per_domain/train.json"
+    },
+    "combined_3_30": {
+        "file_name": "../datasets/combined_3/30_per_domain/train.json"
+    },
+    "combined_3_50": {
+        "file_name": "../datasets/combined_3/50_per_domain/train.json"
+    },
+    "combined_3_100": {
+        "file_name": "../datasets/combined_3/100_per_domain/train.json"
+    },
+    "combined_3_200": {
+        "file_name": "../datasets/combined_3/200_per_domain/train.json"
+    },
+    "combined_3_500": {
+        "file_name": "../datasets/combined_3/500_per_domain/train.json"
+    },
+    "combined_3_all": {
+        "file_name": "../datasets/combined_3/train.json"
+    },
+    "fetaqa_500": {
+        "file_name": "../datasets/combined_3/500_per_domain/fetaqa/train.json"
+    },
+    "hitab_500": {
+        "file_name": "../datasets/combined_3/500_per_domain/hitab/train.json"
+    },
+    "tabfact_500": {
+        "file_name": "../datasets/combined_3/500_per_domain/tabfact/train.json"
+    },
+    "tricky_fetaqa": {
+        "file_name": "../datasets/fetaqa/processed_tricky/fetaqa_test.json"
+    },
+    "tricky_hitab": {
+        "file_name": "../datasets/hitab/processed_tricky/hitab_test.json"
+    },
+    "tricky_tabfact": {
+        "file_name": "tablellm/datasets/tabfact/processed_tricky/tabfact_test.json"
+    },
+    "tama_train": {
+        "file_name": "../datasets/tama_instruct/combined_200/train/train.json"
+    },
+    "tama_train_2600": {
+        "file_name": "../datasets/tama_instruct/combined_200/train/train.json"
+    },
+    "ait-qa_test": {
+        "file_name": "../datasets/tama_instruct/combined_200/test/ait-qa_test.json"
+    },
+    "fetaqa_test": {
+        "file_name": "../datasets/fetaqa/processed/fetaqa_test.json"
+    },
+    "feverous_test": {
+        "file_name": "../datasets/feverous/processed/feverous_eval.json"
+    },
+    "hitab_test": {
+        "file_name": "../datasets/hitab/processed/hitab_test.json"
+    },
+    "hybridqa_test": {
+        "file_name": "../datasets/hybridqa/processed/hybridqa_eval.json"
+    },
+    "infotabs_test": {
+        "file_name": "../datasets/tama_instruct/combined_200/test/infotabs_test.json"
+    },
+    "kvret_test": {
+        "file_name": "../datasets/kvret/processed/kvret_test.json"
+    },
+    "tabfact_test": {
+        "file_name": "../datasets/tabfact/processed/tabfact_test.json"
+    },
+    "tabmwp_test": {
+        "file_name": "../datasets/tama_instruct/combined_200/test/tabmwp_test.json"
+    },
+    "tatqa_test": {
+        "file_name": "../datasets/tama_instruct/combined_200/test/tatqa_test.json"
+    },
+    "totto_test": {
+        "file_name": "../datasets/totto/processed/totto_eval.json"
+    },
+    "wikisql_test": {
+        "file_name": "../datasets/wikisql/processed/wikisql_test.json"
+    },
+    "wikitq_test": {
+        "file_name": "../datasets/wikitq/processed/wikitq_test.json"
+    },
+    "instruction_following_dev": {
+        "file_name": "../datasets/instruction_following/processed/dev.json"
+    },
+    "instruction_following_test": {
+        "file_name": "../datasets/instruction_following/processed/test.json"
+    },
+    "s1_test": {
+        "file_name": "../datasets/tama_instruct/s1/processed/test.json"
+    },
+    "s1_test_gpt_500": {
+        "file_name": "../datasets/tama_instruct/s1/processed/test_all_gpt_500.json"
+    },
+    "s1_all_test": {
+        "file_name": "../datasets/tama_instruct/s1/processed/test_all.json"
+    },
+    "s2_test": {
+        "file_name": "../datasets/tama_instruct/s2/processed/test.json"
+    },
+    "tabmwp_json_test": {
+        "file_name": "../datasets/tama_instruct/tabmwp/processed/test_json.json"
+    },
+    "fetaqa_dev": {
+        "file_name": "../datasets/combined_3/dev/fetaqa.json"
+    },
+    "hitab_dev": {
+        "file_name": "../datasets/combined_3/dev/hitab.json"
+    },
+    "tabfact_dev": {
+        "file_name": "../datasets/combined_3/dev/tabfact.json"
+    },
+    "gsm8k_test": {
+        "file_name": "../datasets/gsm8k/processed/test.json"
+    }
+}
