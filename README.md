@@ -45,8 +45,7 @@ Modify the YAML configuration files to match your local environment:
 
 ### Example Training Command:
 ```
-cd yamls/
-llamafactory-cli train train.yaml
+llamafactory-cli train yamls/train.yaml
 ```
 
 
