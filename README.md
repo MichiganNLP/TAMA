@@ -22,7 +22,7 @@ Based on our findings, we introduce **TAMA**, a *TA*ble LLM instruction-tuned fr
 Our findings highlight the potential for reduced data annotation costs and more efficient model development through careful hyperparameter selection.
 
 
-## How to Run TAMA
+## 🤗 How to Run TAMA
 
 Starting with `transformers >= 4.43.0` onward, you can run conversational inference using the Transformers pipeline abstraction or by leveraging the Auto classes with the generate() function.
 
@@ -61,7 +61,7 @@ appropriately completes the request.
 
 Here is a more detailed [example](examples/inference.py).
 
-## Repository Structure
+## 🏗️ Repository Structure
 
 ### `datasets`
 Contains processed data derived from existing table understanding benchmarks and the combined datasets used for our hyperparameter exploration.
@@ -90,7 +90,7 @@ python -m src.process_data.select_train_data
 Additional scripts for other datasets and plots can be found within respective directories.
 
 
-## Model Training and Inference
+## 🛠️ Model Training and Inference
 
 We utilize the [LLaMA Factory](https://github.com/hiyouga/LLaMA-Factory) library for model training and inference. Example YAML configuration files are provided under the `yamls` directory.
 
@@ -108,7 +108,7 @@ llamafactory-cli train yamls/train.yaml
 For further guidance, detailed examples, or troubleshooting, please consult the original [LLaMA Factory documentation](https://github.com/hiyouga/LLaMA-Factory). You may also open issues directly in this repository or search existing solutions on the [LLaMA Factory GitHub](https://github.com/hiyouga/LLaMA-Factory/issues).
 
 
-## Citations
+## 📖 Citations
 
 Please kindly cite our paper if you use our code, data, models or results:
 
