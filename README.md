@@ -4,7 +4,7 @@
 <img src="assets/spider_performance.png" width="300" title="Spider Performance" alt="Spider Performance"/>
 </div>
 
-This repository provides the overview and resources for the paper [*Rethinking Table Instruction Tuning*](www.google.com), published in ACL 2025 Findings.
+This repository provides the overview and resources for the paper [*Rethinking Table Instruction Tuning*](https://arxiv.org/abs/2501.14693), published in ACL 2025 Findings.
 
 
 ## 🔥 News

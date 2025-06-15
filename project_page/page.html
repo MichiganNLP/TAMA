@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description"
+    content="An open-source table LLM.">
+  <meta property="og:title" content="TAMA" />
+  <meta property="og:description"
+    content="An open-source table LLM." />
+  <meta property="og:url" content="https://github.com/MichiganNLP/TAMA" />
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+
+
+  <meta name="twitter:title" content="TAMA: Rethinking Table Instruction Tuning">
+  <meta name="twitter:description"
+    content="Recent advances in table understanding have
+focused on instruction-tuning large language
+models (LLMs) for table-related tasks. However, existing research has overlooked the impact of hyperparameter choices and lacks a
+comprehensive evaluation of the out-of-domain
+table understanding ability and the general capabilities of these table LLMs. In this paper,
+we evaluate these abilities in existing table
+LLMs, and reveal significant declines in both
+out-of-domain table understanding and general capabilities compared to their base models.
+Through systematic analysis, we show that hyperparameters, such as learning rate, can significantly influence both table-specific and general capabilities. Contrary to the existing table
+instruction-tuning works, we demonstrate that
+smaller learning rates and fewer training instances can enhance table understanding while
+preserving general capabilities. Based on our
+findings, we introduce TAMA, a TAble LLM
+instruction-tuned from LLaMA 3.1 8B Instruct,
+which achieves performance on par with, or
+surpassing GPT-3.5 and GPT-4 on table tasks,
+while maintaining strong out-of-domain generalization and general capabilities. Our findings
+highlight the potential for reduced data annotation costs and more efficient model development through careful hyperparameter selection.">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords"
+    content="Large Language Models, Instruction Tuning, Table Understanding, Natural Language Processing, Llama">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>TAMA: Rethinking Table Instruction Tuning</title>
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+
+<body>
+
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <!-- Flex container for icon and title -->
+            <div style="display: flex; align-items: center; justify-content: center;">
+              <h1 class="title is-1 publication-title">TAMA: Rethinking Table Instruction Tuning</h1>
+            </div>
+            <!-- <h1 class="title is-1 publication-title">TableLlama: Towards Open Large Generalist Models for Tables</h1> -->
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://dnaihao.github.io/" target="_blank">Naihao Deng</a>,</span>
+              <span class="author-block">
+                <a href="https://web.eecs.umich.edu/~mihalcea/" target="_blank">Rada Mihalcea</a></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                University of Michigan
+                <!-- <br>Conferance name and year</span> -->
+                <br>
+                <span class="author-block">
+                  <a href="dnaihao@umich.edu">dnaihao@umich.edu</a>,
+                  <a href="mihalcea@umich.edu">mihalcea@umich.edu</a>
+                </span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Huggingface Dataset link -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/collections/MichiganNLP/tama-684eeb3e7f262362856eccd1" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">🤗</span>
+                    <span>Dataset</span>
+                  </a>
+                </span>
+
+                <!-- Huggingface Model link -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/collections/MichiganNLP/tama-684eeb3e7f262362856eccd1" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">🤗</span>
+                    <span>Models</span>
+                  </a>
+                </span>
+
+                <!-- Github link -->
+                <span class="link-block">
+                  <a href="https://github.com/MichiganNLP/TAMA" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2501.14693" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Paper abstract -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <!-- <h2 class="title is-3">Introduction</h2> -->
+            <div class="content has-text-justified">
+              <p>
+                Recent advances in table understanding have focused on instruction-tuning large language models (LLMs) for table-related tasks. However, existing research has overlooked the impact of hyperparameter choices, and also lacks a comprehensive evaluation of the out-of-domain table understanding ability and the general capabilities of these table LLMs. In this paper, we evaluate these abilities in existing table LLMs, and find significant declines in both out-of-domain table understanding and general capabilities as compared to their base models.
+                </p>
+                <p>
+                Through systematic analysis, we show that hyperparameters, such as learning rate, can significantly influence both table-specific and general capabilities. Contrary to the previous table instruction-tuning work, we demonstrate that smaller learning rates and fewer training instances can enhance table understanding while preserving general capabilities. Based on our findings, we introduce <b>TAMA</b>, a <b>TA</b>ble LLM instruction-tuned from LLa<b>MA</b> 3.1 8B Instruct, which achieves performance on par with, or surpassing GPT-3.5 and GPT-4 on table tasks, while maintaining strong out-of-domain generalization and general capabilities. Our findings highlight the potential for reduced data annotation costs and more efficient model development through careful hyperparameter selection.
+                </p>
+                <p>In this work,
+                    <ul>
+                    <li>
+                        We examine the existing table LLMs and reveal that these table LLMs do not generalize to out-of-domain table tasks and show compromised general capabilities compared to their base model.
+                    </li>
+                    <li>
+                        We reveal the impacts of the often-ignored hyperparameter selection such as the learning rate,
+                        number of training instances, etc. We find that
+                        the commonly-adopted learning rate can be too
+                        large, and may lead to suboptimal table understanding performance and compromises the
+                        model’s general capabilities. In addition, we can achieve strong table understanding ability with a
+                        much smaller amount of training data compared
+                        to the existing works.
+                    </li>
+                    <li>
+                        Based on our findings, with careful hyperparameter selection, we instruction-tune LLaMA 3.1
+                        8B Instruct model with 2,600 table instruction
+                        data. As an 8B size model, our resulting model,
+                        TAMA achieves performance on par with, or
+                        even exceeding GPT-3.5 in table understanding tasks, and in some cases surpasses GPT4, while retaining the general capabilities of its
+                        base model. Moreover, TAMA exhibits strong
+                        out-of-domain table understanding and general
+                        capabilities (Figure 1).
+                    </li>
+                </ul>
+                </p>
+              <!-- is adopted to address the long context challenge. <b>TableLlama</b> is trained on <b>TableInstruct</b> and achieves comparable or even better performance than the SOTA on almost all of the in-domain tasks. For out-of-domain tasks, compared with the base model, TableLlama can achieve 6-48 absolute point gains on 6 datasets, which demonstrates that TableInstruct can substantially enhance model generalizability. -->
+               <p>
+                <b>Resources</b>
+                <ul>
+                    <li><a href="https://huggingface.co/MichiganNLP/tama-1e-6#results">Here are our results</a>.</li>
+                    <li><a href="https://huggingface.co/MichiganNLP/tama-1e-6#%F0%9F%94%A8-how-to-get-started-with-the-model">Get started with TAMA!</a></li>
+                </ul>
+               </p>
+
+              <!-- Image carousel -->
+              <section class="hero">
+                <div class="hero-body">
+                  <div class="container is-max-desktop">
+                    <div class="columns is-centered">
+                      <div class="column is-four-fifths">
+                        <div class="item">
+                          <!-- Your image here -->
+                          <img src="assets/spider_performance.png"
+                            alt="An overview of Performance Comparison">
+                          <p>
+                            <b>Figure 1</b>: An overview of performance comparison between TAMA and existing table LLMs.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!-- End image carousel -->
+
+
+              <p><i>🔥 News</i></p>
+              <ul>
+                <li>2025.6 We release the model checkpoints <a href="https://huggingface.co/collections/MichiganNLP/tama-684eeb3e7f262362856eccd1">models</a>! 🤗</li>
+                <li>2025.4 Our paper of <b>Rethinking Table Instruction Tuning</b> has been accepted by ACL 2025 Findings! 🎉
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End paper abstract -->
+  
+
+
+  <!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">Reference</h2>
+      Please kindly cite our paper if you use our code, data, models or results:
+      <br><br>
+      <pre><code>@misc{
+deng2025rethinking,
+title={Rethinking Table Instruction Tuning},
+author={Naihao Deng and Rada Mihalcea},
+year={2025},
+url={https://openreview.net/forum?id=GLmqHCwbOJ}
+}
+      </code></pre>
+    </div>
+  </section>
+  <!--End BibTex citation -->
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+
+            <p>
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                target="_blank">Academic Project Page Template</a> which was adopted from the <a
+                href="https://nerfies.github.io" target="_blank">Nerfies</a> project page, licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+                We adapt this page from <a href="https://osu-nlp-group.github.io/TableLlama/">TableLlama</a>.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Statcounter tracking code -->
+
+  <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+  <!-- End of Statcounter Code -->
+
+</body>
+
+</html>
