@@ -106,3 +106,18 @@ llamafactory-cli train yamls/train.yaml
 
 
 For further guidance, detailed examples, or troubleshooting, please consult the original [LLaMA Factory documentation](https://github.com/hiyouga/LLaMA-Factory). You may also open issues directly in this repository or search existing solutions on the [LLaMA Factory GitHub](https://github.com/hiyouga/LLaMA-Factory/issues).
+
+
+## Citations
+
+Please kindly cite our paper if you use our code, data, models or results:
+
+```
+@misc{
+deng2025rethinking,
+title={Rethinking Table Instruction Tuning},
+author={Naihao Deng and Rada Mihalcea},
+year={2025},
+url={https://openreview.net/forum?id=GLmqHCwbOJ}
+}
+```
