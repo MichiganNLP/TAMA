@@ -8,8 +8,8 @@ This repository provides the overview and resources for the paper [*Rethinking T
 
 
 ## 🔥 News
- - 2025.7 We release the model checkpoints based on QWen2.5 and QWen3 [models](https://huggingface.co/collections/MichiganNLP/tama-models-684eeb3e7f262362856eccd1), with [TAMA-QWen3](https://huggingface.co/MichiganNLP/TAMA-QWen3) yielding 33.9 on MMTU 🤗.
- - 2025.6 We release the model checkpoints [models](https://huggingface.co/collections/MichiganNLP/tama-models-684eeb3e7f262362856eccd1)! 🤗
+ - 2025.7 We release the model [checkpoints](https://huggingface.co/collections/MichiganNLP/tama-models-684eeb3e7f262362856eccd1) based on QWen2.5 and QWen3, with [TAMA-QWen3](https://huggingface.co/MichiganNLP/TAMA-QWen3) yielding 33.9 on MMTU 🤗.
+ - 2025.6 We release the model [checkpoints](https://huggingface.co/collections/MichiganNLP/tama-models-684eeb3e7f262362856eccd1)! 🤗
  - 2025.4 Our paper of **Rethinking Table Instruction Tuning** has been accepted by ACL 2025 Findings! 🎉
 
 ## 💡 Introduction
